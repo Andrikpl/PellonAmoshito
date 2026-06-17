@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mariana ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #d6336c;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #d6336c;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-yes {
+            background-color: #d6336c;
+            color: white;
+            box-shadow: 0 4px 15px rgba(214, 51, 108, 0.4);
+        }
+
+        .btn-yes:hover {
+            background-color: #c2255c;
+            transform: translateY(-2px);
+        }
+
+        .btn-no {
+            background-color: #f1f3f5;
+            color: #868e96;
+            position: relative;
+        }
+
+        /* Corazones flotantes para cuando diga que sí */
+        .heart {
+            position: absolute;
+            top: -20%;
+            transform: translateY(0);
+            font-size: 1.5rem;
+            color: #d6336c;
+            animation: fall 3s linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(120vh) rotate(360deg);
+            }
+        }
+
+        #successMessage {
+            display: none;
+            margin-top: 20px;
+            color: #2b8a3e;
+            font-weight: 600;
+            font-size: 1.2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <h1>Perdóname, Mariana...</h1>
+        <p>Hola, mi amor. Quería hacer algo diferente para pedirte una disculpa de todo corazón.</p>
+        <p>Sé que tuvimos una pelea y me equivoqué al hablarte fuerte. No fue mi intención lastimarte ni hacerte sentir mal. Eres la persona más importante en mi vida y me duele saber que te hice pasar un mal rato.</p>
+        <p>Prometo aprender de esto y ser mejor para nosotros. Te amo muchísimo, <span class="highlight">Mariana Mendoza de la Fuente</span>.</p>
+        <p>Con mucho arrepentimiento y amor,<br><strong>Tu Andrik Pérez Luna</strong>.</p>
+        
+        <div class="btn-container" id="buttons">
+            <button class="btn-yes" onclick="forgiveMe()">Sí te perdono ❤️</button>
+            <button class="btn-no" id="btnNo" onmouseover="moveButton()">Aún sigo enojada</button>
+        </div>
+
+        <div id="successMessage">
+            ¡Gracias mi amor! Prometo compensártelo. Te amo infinito. 🥰
+        </div>
+    </div>
+
+    <script>
+        // Función para mover el botón de "No" para que sea difícil de clickear
+        function moveButton() {
+            const btnNo = document.getElementById("btnNo");
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth - 50);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight - 50);
+            
+            btnNo.style.position = "fixed";
+            btnNo.style.left = `${x}px`;
+            btnNo.style.top = `${y}px`;
+        }
+
+        // Función para cuando acepta las disculpas
+        function forgiveMe() {
+            document.getElementById("buttons").style.display = "none";
+            document.getElementById("successMessage").style.display = "block";
+            
+            // Lluvia de corazones
+            for(let i = 0; i < 30; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+
